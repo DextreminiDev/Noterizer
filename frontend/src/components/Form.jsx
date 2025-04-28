@@ -16,6 +16,25 @@ export default function Form({route, method, linkTo}){
 
     const name = method === "login" ? "Login" : "Register"
 
+    var firstText = " "
+    var secondText = " "
+    var formSide = " "
+    var imageSide = " "
+
+    if(method === "login"){
+        firstText = "Welcome back"
+        secondText = "Log in to your account using username and password"
+        formSide = "left"
+        imageSide = "right"
+    } else {
+        firstText = "Register"
+        secondText = "Create your new account by entering a username and password"
+        formSide = "right-2"
+        imageSide = "left-2"
+    }
+
+    
+
     const handleSubmit = async (e) => {
         setLoading(true)
         e.preventDefault()
@@ -40,30 +59,101 @@ export default function Form({route, method, linkTo}){
     }
 
     return( 
-        <form onSubmit={handleSubmit} className="form-container">
-            <h1>{name}</h1>
-            <input 
-                className="form-input"
-                type="text"
-                value={username}
-                onChange={(e)=>setUsername(e.target.value)}
-                placeholder="Username"
-            />
-            <input 
-                className="form-input"
-                type="password"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
-                placeholder="Password"
-            />
-            {loading && <LoadingIndicator />}
-            <button className="form-button" type="submit">
-                {name}
-            </button>
+        <div className="container">
+            {method === "login" ? (
+            <>
+                <div className={formSide}>
+                    <div className="header">
+                        <h2 className="animation a1">{firstText}</h2>
+                        <h4 className="animation a2">{secondText}</h4>
+                    </div>
 
-            <Link to={`/${linkTo}`} className="form-button">
-                {linkTo.charAt(0).toUpperCase() + linkTo.slice(1)} 
-            </Link>
-        </form>
+                    <form onSubmit={handleSubmit} className="form">
+                        <input 
+                            className="form-field animation a3"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Username"
+                        />
+                        <input 
+                            className="form-field animation a4"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+                        />
+
+                        {loading && <LoadingIndicator />}
+
+                        <button type="submit" className="animation a6 main-button">
+                            {name}
+                        </button>
+
+                        <button
+                            type="button"         
+                            onClick={() => {navigate(`/${linkTo}`)}} 
+                            className="animation a6 secondary-button"
+                            style={{ marginTop: "10px" }}
+                        >
+                            {linkTo.charAt(0).toUpperCase() + linkTo.slice(1)}
+                        </button>
+
+                    </form>
+                </div>
+
+                <div className={imageSide}>
+                    {/* You can put your right side image or design here */}
+                </div>
+            </>
+            ):(
+            <>
+                <div className={imageSide}>
+                    {/* You can put your right side image or design here */}
+                </div>
+                
+                <div className={formSide}>
+                    <div className="header">
+                        <h2 className="animation a1">{firstText}</h2>
+                        <h4 className="animation a2">{secondText}</h4>
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="form">
+                        <input 
+                            className="form-field animation a3"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Username"
+                        />
+                        <input 
+                            className="form-field animation a4"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+                        />
+
+                        {loading && <LoadingIndicator />}
+
+                        <button type="submit" className="animation a6 main-button">
+                            {name}
+                        </button>
+
+                        <button
+                            type="button"         
+                            onClick={() => {navigate(`/${linkTo}`)}} 
+                            className="animation a6 secondary-button"
+                            style={{ marginTop: "10px" }}
+                        >
+                            {linkTo.charAt(0).toUpperCase() + linkTo.slice(1)}
+                        </button>
+
+                    </form>
+                </div>
+
+            </>
+            )}
+        </div>
     )
 }

@@ -3,7 +3,6 @@ import { useState } from "react";
 import api from "../api";
 
 import "../styles/Form.css"
-import "../styles/main.css"
 
 function Home() {
     const [files, setFiles] = useState([]);
