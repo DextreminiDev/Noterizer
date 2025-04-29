@@ -1,4 +1,4 @@
-import os
+import os, shutil
 from pathlib import Path
 
 from cleanupcrew import createInitialDirs, janitor
@@ -9,6 +9,7 @@ from JSONtoHTML import JSONtoHTML
 MISTRAL_API_KEY = "AmCYZL30Cp40IHGrFE4QP52wxAOxN5hQ"
 GEMINI_API_KEY = "AIzaSyBmAW5N4LWHbuaDJY350RjnDVzxpsXbc8A"
 
+
 def main():
     BASE_DIR = os.path.dirname(__file__)
 
@@ -16,6 +17,8 @@ def main():
     intermediatory_dir = os.path.join(BASE_DIR, "intermediate")
     output_dir = os.path.join(BASE_DIR, "output")
     
+    janitor(output_dir)
+
     if not uploads_dir:
         print(f"The following prerequisite folder is not present or cannot be created: {uploads_dir}")
         return
@@ -40,6 +43,7 @@ def main():
     JSONtoHTML(intermediatory_dir, output_dir, GEMINI_API_KEY)
 
     janitor(intermediatory_dir)
+    janitor(uploads_dir)
 
 if __name__ == '__main__':
     main()

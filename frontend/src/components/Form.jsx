@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Link } from "react-router"
 import { useNavigate } from "react-router-dom"
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"
 
@@ -59,11 +58,12 @@ export default function Form({route, method, linkTo}){
     }
 
     return( 
-        <div className="container">
+        <div className="form-body container">
             {method === "login" ? (
             <>
                 <div className={formSide}>
                     <div className="header">
+                        <h1 className="animation a1">Noterizer</h1>
                         <h2 className="animation a1">{firstText}</h2>
                         <h4 className="animation a2">{secondText}</h4>
                     </div>
@@ -114,6 +114,7 @@ export default function Form({route, method, linkTo}){
                 
                 <div className={formSide}>
                     <div className="header">
+                        <h1 className="animation a1">Noterizer</h1>
                         <h2 className="animation a1">{firstText}</h2>
                         <h4 className="animation a2">{secondText}</h4>
                     </div>
