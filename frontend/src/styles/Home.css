@@ -1,14 +1,46 @@
-.home-container {
+#particles-js {
+    background:#f0f0e8;
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    pointer-events: none; /* make sure it's not blocking interaction */
+}
+
+.home-container {
+    position: relative;
+    z-index: 1;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-family: 'Rubik', sans-serif;
-    background: #f9f9f9;
     margin: 0;
     padding: 0;
+    background-size: cover;
+    animation: fadeSlideIn 0.8s ease-out;
+}
+
+.home-container .title {
+    animation: fadeSlideIn 0.8s ease-out;
+    animation-delay: 0.1s;
+    animation-fill-mode: both;
+}
+
+.home-container .subtitle {
+    animation: fadeSlideIn 0.8s ease-out;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+.home-container .tagline {
+    animation: fadeSlideIn 0.8s ease-out;
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
 }
 
 .title {
@@ -36,6 +68,7 @@
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 400px;
 }
 
 .file-input {
@@ -52,9 +85,12 @@
     padding: 10px 20px;
     font-size: 14px;
     border: none;
-    border-radius: 8px;
+    font-weight: 500;
+    border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
+    width: 170px;
+    margin-top: 5px;
 }
 
 .upload-btn {
@@ -83,3 +119,68 @@
 .download-btn:hover {
     background-color: #007acc;
 }
+
+.file-input-hidden {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgb(34, 161, 34);
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-bottom: 5px;
+    width: 350px;
+}
+
+.file-list {
+    margin-top: 10px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.07);
+    padding: 10px 15px;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.95rem;
+    color: #eee;
+}
+
+.file-entry {
+    color: #222;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.file-entry:last-child {
+    border-bottom: none;
+}
+
+.file-emoji {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+.file-name {
+    word-break: break-word;
+    flex-grow: 1;
+}
+
+
+@keyframes fadeSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+  
