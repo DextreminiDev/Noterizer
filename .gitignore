@@ -32,3 +32,6 @@ media
 output/*
 uploads/*
 intermediate
+
+package-lock.json
+package.json

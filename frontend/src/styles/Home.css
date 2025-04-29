@@ -172,6 +172,51 @@
     flex-grow: 1;
 }
 
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    padding: 5px 0;
+    overflow: hidden;
+    position: absolute;
+}
+
+.logout-button::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: #666;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.logout-button:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.top-left-title {
+    position: absolute;
+    top: 20px;
+    left: 30px; 
+    background: none;
+    border: none;
+    color: #666;
+    /* color: #222; */
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+    padding: 5px 0;
+    overflow: hidden;
+}
 
 @keyframes fadeSlideIn {
     0% {

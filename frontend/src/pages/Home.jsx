@@ -1,11 +1,67 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"
+import { ACCESS_TOKEN } from "../constants";
+
 import api from "../api";
 import "../styles/Home.css";
+
+
+function getRandomGreeting() {
+    const greetings = [
+      "Hi,",
+      "Hey,",
+      "Welcome back,",
+      "Good to see you,",
+      "Yo,",
+      "Howdy,",
+      "Nice to have you here,",
+      "Sup,",
+      "What's up,",
+      "Ahoy,",
+      "Hello again,",
+      "Glad you're here,",
+      "Hey hey,",
+      "Hola,",
+      "Bonjour,",
+      "Greetings,",
+      "Hey there,",
+      "Long time no see,",
+      "Look who's here,",
+      "Top of the morning,",
+      "Namaste,",
+      "Wassup,",
+      "Good to have you back,",
+      "Oi,",
+      "Welcome aboard,",
+      "Salutations,",
+      "You made it,",
+      "Ready to crush it,",
+      "Let's do this,",
+      "Always a pleasure,",
+      "Back again, I see,",
+      "Nice seeing you,",
+      "You're here! Awesome,"
+    ];
+  
+    const randomIndex = Math.floor(Math.random() * greetings.length);
+    return greetings[randomIndex];
+}
 
 export default function Home() {
     const [files, setFiles] = useState([]);
     const [outputFiles, setOutputFiles] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [username, setUsername] = useState("");
+
+    const navigate = useNavigate()
+
+
+    useEffect(() => {
+      api.get("/api/user/me/")
+        .then(res => setUsername(res.data.username))
+        .catch(err => console.error("Failed to fetch username", err));
+    }, []);
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -81,7 +137,17 @@ export default function Home() {
         <>
             <div id="particles-js"></div>
             <div className="home-container">
-                <h1 className="title">NOTERIZER</h1>
+                <button
+                    type="button"         
+                    onClick={() => {navigate(`/logout`)}} 
+                    className="logout-button"
+                >
+                    Logout
+                </button>
+                <div className="top-left-title">
+                    Noterizer
+                </div>
+                <h1 className="title">{`${getRandomGreeting()} ${username}`}</h1>
                 <p className="subtitle">Notes Generation and Management Application</p>
                 <p className="tagline">One Click. Perfect Notes. Every Time.</p>
 

@@ -78,3 +78,11 @@ class FileDownloadView(APIView):
             return FileResponse(open(output_path, 'rb'), as_attachment=True)
         else:
             return Response({"error": "File not found."}, status=404)
+
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
