@@ -6,13 +6,13 @@
     height: 100vh;
     width: 100vw;
     z-index: -1;
-    pointer-events: none; /* make sure it's not blocking interaction */
+    pointer-events: none; 
 }
 
 .home-container {
     position: relative;
     z-index: 1;
-    height: 95vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,6 +82,7 @@
 }
 
 .upload-btn, .process-btn, .download-btn {
+    font-family: 'Rubik', sans-serif;
     padding: 10px 20px;
     font-size: 14px;
     border: none;
@@ -90,16 +91,16 @@
     cursor: pointer;
     transition: background 0.3s;
     width: 170px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .upload-btn {
-    background-color: #ff4b5c;
+    background: #4f46a5;
     color: white;
 }
 
 .upload-btn:hover {
-    background-color: #e04352;
+    background: #3d3586;
 }
 
 .process-btn {
@@ -112,12 +113,12 @@
 }
 
 .download-btn {
-    background-color: #0099ff;
+    background: #4f46a5;
     color: white;
 }
 
 .download-btn:hover {
-    background-color: #007acc;
+    background: #3d3586;
 }
 
 .file-input-hidden {
@@ -127,7 +128,7 @@
 .custom-file-upload {
     display: inline-block;
     padding: 10px 20px;
-    background: rgb(34, 161, 34);
+    background: #4f46a5;
     color: white;
     font-weight: 500;
     border-radius: 5px;
@@ -135,27 +136,32 @@
     transition: background 0.3s ease;
     margin-bottom: 5px;
     width: 350px;
+    border: none;
 }
+
+.custom-file-upload:hover {
+    background: #3d3586;
+}
+
 
 .file-list {
     margin-top: 10px;
     text-align: left;
-    background-color: rgba(255, 255, 255, 0.07);
+    background-color: #f8f8f8;
     padding: 10px 15px;
     border-radius: 8px;
     max-height: 200px;
     overflow-y: auto;
     font-family: 'Rubik', sans-serif;
     font-size: 0.95rem;
-    color: #eee;
+    color: #333;
 }
 
 .file-entry {
-    color: #222;
     display: flex;
     align-items: center;
     padding: 5px 0;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    border-bottom: 1px dashed #e0b6fc;
 }
 
 .file-entry:last-child {
@@ -216,6 +222,22 @@
     font-family: 'Rubik', sans-serif;
     padding: 5px 0;
     overflow: hidden;
+}
+
+.slider-section {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    color: #222;
+}
+
+.slider {
+    width: 80%;
+    margin-top: 10px;
+}
+
+.username{
+    color: #4f46a5;
 }
 
 @keyframes fadeSlideIn {

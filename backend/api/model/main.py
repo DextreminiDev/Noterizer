@@ -1,5 +1,6 @@
 import os
-                                                                                                                                                                                                     
+import sys
+
 from dotenv import load_dotenv, find_dotenv
 from cleanupcrew import createInitialDirs, janitor
 from docs_processing import processDoc
@@ -43,7 +44,8 @@ def main():
         else:
             print(f"The following file has unsupported type: {file}")
 
-    JSONtoHTML(intermediatory_dir, output_dir, GEMINI_API_KEY)
+    # JSONtoHTML(intermediatory_dir, output_dir, GEMINI_API_KEY)
+    JSONtoHTML(intermediatory_dir, output_dir, GEMINI_API_KEY, sys.argv[1])
 
     janitor(intermediatory_dir)
     janitor(uploads_dir)

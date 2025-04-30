@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode"
-import { ACCESS_TOKEN } from "../constants";
 
 import api from "../api";
 import "../styles/Home.css";
@@ -54,6 +52,7 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState("");
     const [greeting, setGreeting] = useState("")
+    const [detailLevel, setDetailLevel] = useState(1);
 
     const navigate = useNavigate()
 
@@ -98,6 +97,8 @@ export default function Home() {
         files.forEach((file) => {
             formData.append('files', file);
         });
+
+        formData.append('detail_level', detailLevel);
 
         try {
             const res = await api.post("/api/upload/", formData, {
@@ -153,7 +154,7 @@ export default function Home() {
                 <div className="top-left-title">
                     Noterizer
                 </div>
-                <h1 className="title">{`${greeting} ${username}`}</h1>
+                <h1 className="title">{`${greeting}`} <span className="username">{`${username}`}</span></h1>
                 <p className="subtitle">Notes Generation and Summarization Application</p>
                 <p className="tagline">One Click. Perfect Notes. Every Time.</p>
 
@@ -198,6 +199,18 @@ export default function Home() {
                                 Download
                             </button>
                         )}
+                    </div>
+                    <div className="slider-section">
+                        <label htmlFor="detail-slider">Detail Level: {detailLevel}</label>
+                        <input
+                            type="range"
+                            id="detail-slider"
+                            min="1"
+                            max="5"
+                            value={detailLevel}
+                            onChange={(e) => setDetailLevel(parseInt(e.target.value))}
+                            className="slider"
+                        />
                     </div>
                 </div>
             </div>

@@ -37,6 +37,7 @@ class FileUploadView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
+        detail_level = request.POST.get('detail_level', '1')
         files = request.FILES.getlist('files')
         
         upload_folder = os.path.join('api', 'model', 'uploads')
@@ -54,7 +55,8 @@ class FileUploadView(APIView):
         model_main_py = os.path.join(BASE_DIR, 'api', 'model', 'main.py')
         
         try:
-            subprocess.run(["python", model_main_py], check=True)
+            # subprocess.run(["python", model_main_py], check=True)
+            subprocess.run(["python", model_main_py, detail_level], check=True)
         except subprocess.CalledProcessError:
             return Response({"error": "Processing failed!"}, status=500)
         

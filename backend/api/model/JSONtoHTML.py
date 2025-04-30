@@ -11,7 +11,19 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # Create the full path to the CSS file
 css_file_path = os.path.join(script_dir, "main.css")
 
-def JSONtoHTML(intermediatory_dir, output_dir, GEMINI_API_KEY):
+def JSONtoHTML(intermediatory_dir, output_dir, GEMINI_API_KEY, detail_level):
+
+    if(detail_level == 1):
+        detail_prompt = "Explain like I'm a young child. Use ultra-simple words, no jargon, and keep it extremely basic and surface-level."
+    elif(detail_level == 2):
+        detail_prompt = "Assume the user has a very basic understanding. Use easy terms, light examples, and avoid technical language."
+    elif(detail_level == 3):
+        detail_prompt = "Speak as if to a high school or general audience. Introduce moderate detail and technical terms, but explain them clearly."
+    elif(detail_level == 4):
+        detail_prompt = "Assume the user has an undergraduate-level understanding of the topic. Use proper terminology and explain concepts in detail."
+    else:
+        detail_prompt = "Dive deep into technicalities, provide nuanced explanations, mathematical/theoretical formulations (if relevant), and cite advanced concepts. Assume the user is a subject-matter expert."
+
     combined_list = []
     files =  [f for f in os.listdir(intermediatory_dir) if os.path.isfile(os.path.join(intermediatory_dir, f))]
 
@@ -27,7 +39,7 @@ def JSONtoHTML(intermediatory_dir, output_dir, GEMINI_API_KEY):
                 for key in data:
                     combined_list.append(data[key])
 
-    base_prompt = """
+    base_prompt = f"""
 
         You are a superior tutor specializing in creating study materials for exams.
 
@@ -49,11 +61,13 @@ def JSONtoHTML(intermediatory_dir, output_dir, GEMINI_API_KEY):
         - Insert <img src="path" /> whenever an image path is provided in the second element of the section.
 
         Constraints:
+        - {detail_prompt}
         - Be highly organized, logical, and focus on educational clarity.
         - Prefer small sections with clear headers over long paragraphs.
         - Keep everything concise but complete — no fluff.
         - Assume the reader is studying for an exam and needs to quickly absorb and revise the key points.
         - Stay faithful to the original OCR text unless improving missing parts.
+        
 
         Output:
         Only the <body> tag content, clean and complete.
