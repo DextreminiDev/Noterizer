@@ -53,19 +53,21 @@ export default function Home() {
     const [outputFiles, setOutputFiles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState("");
+    const [greeting, setGreeting] = useState("")
 
     const navigate = useNavigate()
 
-
+    // Fetching username
     useEffect(() => {
       api.get("/api/user/me/")
         .then(res => setUsername(res.data.username))
         .catch(err => console.error("Failed to fetch username", err));
     }, []);
 
+    // Loading particles.js and app.json
     useEffect(() => {
         const script = document.createElement("script");
-        script.src = "/particles.js"; // from public folder
+        script.src = "/particles.js"; 
         script.async = true;
         script.onload = () => {
             if (window.particlesJS) {
@@ -76,6 +78,10 @@ export default function Home() {
         };
         document.body.appendChild(script);
     }, []);
+
+    useEffect(() => {
+        setGreeting(getRandomGreeting())
+    }, [])
 
     const handleFileChange = (e) => {
         setFiles(Array.from(e.target.files));
@@ -147,8 +153,8 @@ export default function Home() {
                 <div className="top-left-title">
                     Noterizer
                 </div>
-                <h1 className="title">{`${getRandomGreeting()} ${username}`}</h1>
-                <p className="subtitle">Notes Generation and Management Application</p>
+                <h1 className="title">{`${greeting} ${username}`}</h1>
+                <p className="subtitle">Notes Generation and Summarization Application</p>
                 <p className="tagline">One Click. Perfect Notes. Every Time.</p>
 
                 <div className="file-input-section">
@@ -171,7 +177,7 @@ export default function Home() {
                                 if (["png", "jpg", "jpeg", "gif"].includes(ext)) icon = "🖼️";
                                 else if (["pdf"].includes(ext)) icon = "📕";
                                 else if (["doc", "docx"].includes(ext)) icon = "📝";
-                                // else if (["ppt", "pptx"].includes(ext)) icon = "📊";
+                                else if (["ppt", "pptx"].includes(ext)) icon = "📊";
                                 // else if (["zip", "rar"].includes(ext)) icon = "📦";
 
                                 return (

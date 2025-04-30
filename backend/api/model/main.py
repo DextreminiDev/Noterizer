@@ -1,13 +1,16 @@
-import os, shutil
-from pathlib import Path
-
+import os
+                                                                                                                                                                                                     
+from dotenv import load_dotenv, find_dotenv
 from cleanupcrew import createInitialDirs, janitor
 from docs_processing import processDoc
 from image_processing import processImage
 from JSONtoHTML import JSONtoHTML
 
-MISTRAL_API_KEY = "AmCYZL30Cp40IHGrFE4QP52wxAOxN5hQ"
-GEMINI_API_KEY = "AIzaSyBmAW5N4LWHbuaDJY350RjnDVzxpsXbc8A"
+
+load_dotenv()
+
+MISTRAL_API_KEY = os.getenv("MISTRAL")
+GEMINI_API_KEY = os.getenv("GEMINI")
 
 
 def main():
